@@ -45,6 +45,7 @@
             android:name=".BluetoothConnectionActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
+
         </activity>
     </application>
 

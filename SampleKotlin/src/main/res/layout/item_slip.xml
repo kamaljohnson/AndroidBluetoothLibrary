@@ -29,9 +29,9 @@
             android:textColor="@color/white"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:background="@drawable/item_limit_count"
             android:gravity="center">
         </TextView>
-<!--            android:background="@drawable/item_limit_count"-->
 
         <TextView
             android:id="@+id/name"

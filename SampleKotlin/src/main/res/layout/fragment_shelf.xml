@@ -18,10 +18,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:fabSize="normal"
+        android:src="@drawable/right_arrow_icon"
         app:layout_anchor="@+id/bottom_app_bar">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
-<!--        android:src="@drawable/right_arrow_icon">-->
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
