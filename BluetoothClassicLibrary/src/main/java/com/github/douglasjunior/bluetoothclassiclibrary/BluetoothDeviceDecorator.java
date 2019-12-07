@@ -26,7 +26,7 @@ package com.github.douglasjunior.bluetoothclassiclibrary;
 
 import android.Manifest;
 import android.bluetooth.BluetoothDevice;
-import android.support.annotation.RequiresPermission;
+import androidx.annotation.RequiresPermission;
 
 /**
  * Created by Douglas on 16/09/2014.

@@ -27,14 +27,12 @@ package com.xborg.vendx
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 
 import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothService
 import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothStatus
@@ -44,7 +42,6 @@ import java.util.Arrays
 class BluetoothConnectionActivity : AppCompatActivity(), BluetoothService.OnBluetoothScanCallback, BluetoothService.OnBluetoothEventCallback {
 
     private var pgBar: ProgressBar? = null
-    private var mRecyclerView: RecyclerView? = null
 
     private var mBluetoothAdapter: BluetoothAdapter? = null
     private var mService: BluetoothService? = null
@@ -60,10 +57,6 @@ class BluetoothConnectionActivity : AppCompatActivity(), BluetoothService.OnBlue
         pgBar!!.visibility = View.GONE
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-
-        mRecyclerView = findViewById<View>(R.id.rv) as RecyclerView
-        val lm = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mRecyclerView!!.layoutManager = lm
 
         mService = BluetoothService.getDefaultInstance()
 

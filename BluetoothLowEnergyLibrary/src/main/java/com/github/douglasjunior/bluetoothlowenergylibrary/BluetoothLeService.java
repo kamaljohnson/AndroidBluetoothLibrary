@@ -36,8 +36,8 @@ import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.annotation.RequiresPermission;
+import androidx.annotation.RequiresApi;
+import androidx.annotation.RequiresPermission;
 import android.util.Log;
 
 import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothConfiguration;
