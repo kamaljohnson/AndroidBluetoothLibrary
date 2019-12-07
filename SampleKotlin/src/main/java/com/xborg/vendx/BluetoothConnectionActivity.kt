@@ -26,6 +26,7 @@ package com.xborg.vendx
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -98,9 +99,10 @@ class BluetoothConnectionActivity : AppCompatActivity(), BluetoothService.OnBlue
         Toast.makeText(this, status.toString(), Toast.LENGTH_SHORT).show()
 
         if (status == BluetoothStatus.CONNECTED) {
-
+            val intent = Intent(this, VendingActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
-
     }
 
     override fun onDeviceName(deviceName: String) {
