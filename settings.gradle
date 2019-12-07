@@ -1,1 +1,1 @@
-include ':BluetoothLowEnergyLibrary', ':BluetoothClassicLibrary', ':Sample', ':SampleKotlin'
+include ':BluetoothLowEnergyLibrary', ':BluetoothClassicLibrary', ':SampleKotlin'

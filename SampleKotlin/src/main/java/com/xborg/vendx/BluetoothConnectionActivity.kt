@@ -22,37 +22,29 @@
  * SOFTWARE.
  */
 
-package com.github.douglasjunior.bluetoothsamplekotlin
+package com.xborg.vendx
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
-import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 
-import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothDeviceDecorator
 import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothService
 import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothStatus
 
 import java.util.Arrays
 
-class MainActivity : AppCompatActivity(), BluetoothService.OnBluetoothScanCallback, BluetoothService.OnBluetoothEventCallback, DeviceItemAdapter.OnAdapterItemClickListener {
+class BluetoothConnectionActivity : AppCompatActivity(), BluetoothService.OnBluetoothScanCallback, BluetoothService.OnBluetoothEventCallback {
 
     private var pgBar: ProgressBar? = null
-    private var mMenu: Menu? = null
     private var mRecyclerView: RecyclerView? = null
-    private var mAdapter: DeviceItemAdapter? = null
 
     private var mBluetoothAdapter: BluetoothAdapter? = null
     private var mService: BluetoothService? = null
@@ -60,7 +52,7 @@ class MainActivity : AppCompatActivity(), BluetoothService.OnBluetoothScanCallba
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_bluetooth_connection)
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
@@ -73,14 +65,11 @@ class MainActivity : AppCompatActivity(), BluetoothService.OnBluetoothScanCallba
         val lm = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mRecyclerView!!.layoutManager = lm
 
-        mAdapter = DeviceItemAdapter(this, mBluetoothAdapter!!.bondedDevices)
-        mAdapter!!.setOnAdapterItemClickListener(this)
-        mRecyclerView!!.adapter = mAdapter
-
         mService = BluetoothService.getDefaultInstance()
 
         mService!!.setOnScanCallback(this)
         mService!!.setOnEventCallback(this)
+        mService!!.startScan()
     }
 
     override fun onResume() {
@@ -88,42 +77,10 @@ class MainActivity : AppCompatActivity(), BluetoothService.OnBluetoothScanCallba
         mService!!.setOnEventCallback(this)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        mMenu = menu
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-
-        if (id == R.id.action_scan) {
-            startStopScan()
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun startStopScan() {
-        if (!mScanning) {
-            mService!!.startScan()
-        } else {
-            mService!!.stopScan()
-        }
-    }
-
     override fun onDeviceDiscovered(device: BluetoothDevice, rssi: Int) {
         Log.d(TAG, "onDeviceDiscovered: " + device.name + " - " + device.address + " - " + Arrays.toString(device.uuids))
-        val dv = BluetoothDeviceDecorator(device, rssi)
-        val index = mAdapter!!.devices.indexOf(dv)
-        if (index < 0) {
-            mAdapter!!.devices.add(dv)
-            mAdapter!!.notifyItemInserted(mAdapter!!.devices.size - 1)
-        } else {
-            mAdapter!!.devices[index].device = device
-            mAdapter!!.devices[index].rssi = rssi
-            mAdapter!!.notifyItemChanged(index)
+        if(device.address == DeviceAddress) {
+            mService!!.connect(device)
         }
     }
 
@@ -131,14 +88,12 @@ class MainActivity : AppCompatActivity(), BluetoothService.OnBluetoothScanCallba
         Log.d(TAG, "onStartScan")
         mScanning = true
         pgBar!!.visibility = View.VISIBLE
-        mMenu!!.findItem(R.id.action_scan).setTitle(R.string.action_stop)
     }
 
     override fun onStopScan() {
         Log.d(TAG, "onStopScan")
         mScanning = false
         pgBar!!.visibility = View.GONE
-        mMenu!!.findItem(R.id.action_scan).setTitle(R.string.action_scan)
     }
 
     override fun onDataRead(buffer: ByteArray, length: Int) {
@@ -150,19 +105,7 @@ class MainActivity : AppCompatActivity(), BluetoothService.OnBluetoothScanCallba
         Toast.makeText(this, status.toString(), Toast.LENGTH_SHORT).show()
 
         if (status == BluetoothStatus.CONNECTED) {
-            val colors = arrayOf<CharSequence>("Try text", "Try picture")
 
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Select")
-            builder.setItems(colors) { dialog, which ->
-                if (which == 0) {
-                    startActivity(Intent(this@MainActivity, DeviceActivity::class.java))
-                } else {
-                    startActivity(Intent(this@MainActivity, BitmapActivity::class.java))
-                }
-            }
-            builder.setCancelable(false)
-            builder.show()
         }
 
     }
@@ -179,12 +122,8 @@ class MainActivity : AppCompatActivity(), BluetoothService.OnBluetoothScanCallba
         Log.d(TAG, "onDataWrite")
     }
 
-    override fun onItemClick(device: BluetoothDeviceDecorator, position: Int) {
-        mService!!.connect(device.device)
-    }
-
     companion object {
-
         val TAG = "BluetoothExampleKotlin"
+        val DeviceAddress = "3C:71:BF:79:86:22"
     }
 }

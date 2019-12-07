@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.github.douglasjunior.bluetoothsamplekotlin
+package com.xborg.vendx
 
 import android.app.Application
 import android.bluetooth.BluetoothDevice
@@ -37,7 +37,7 @@ import java.util.UUID
 /**
  * Created by douglas on 29/05/17.
  */
-class SampleApplication : Application() {
+class BluetoothConfig : Application() {
 
     override fun onCreate() {
         super.onCreate()
