@@ -1,9 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <Button
+            android:id="@+id/home_button"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:text="Home"
+            android:textStyle="bold">
+
+        </Button>
+<!--            android:background="@drawable/rounded_button_orange"-->
+
+        <Button
+            android:id="@+id/shelf_button"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/home_button"
+            android:background="@color/fui_transparent"
+            android:text="Shelf"
+            android:textStyle="bold">
+
+        </Button>
+
+
+    </RelativeLayout>
+
+    <!--region fragment view    -->
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView style="?android:textAppearanceMedium"
+            android:padding="20dp"
+            android:lineSpacingMultiplier="1.2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
+
+    <androidx.viewpager.widget.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--    end region-->
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="location"
+        android:layout_alignParentBottom="true"
+        app:layout_anchorGravity="bottom"
+        android:paddingBottom="30dp"
+        android:visibility="invisible"
+        android:paddingLeft="10dp">
+    </TextView>
+
+    <!-- Bottom-->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true">
+
+        <ActionMenuView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ActionMenuView>
+<!--            android:background="@drawable/rounded_action_bar">-->
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true">
+        </ImageView>
+<!--            android:src="@drawable/overlay_icon"-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:text="B-X160"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:paddingBottom="15dp"
+            android:textColor="@color/white">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/search_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true">
+        </ImageView>
+<!--            android:src="@drawable/search_icon"-->
+
+        <Button
+            android:id="@+id/nearby_machine_count_text"
+            android:text="3"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp">
+        </Button>
+<!--            android:background="@drawable/rounded_button_orange"-->
+
+        <EditText
+            android:id="@+id/search_text"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:hint="Search"
+            android:textSize="18dp"
+            android:layout_gravity="bottom"
+            android:paddingLeft="5dp"
+            android:textColor="@color/cardview_dark_background"
+            android:background="@color/white"
+            android:visibility="invisible"
+            android:textColorHint="@color/white"
+            android:singleLine="true"
+            android:inputType="textPersonName">
+        </EditText>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="60dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/get_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+<!--            android:src="@drawable/right_arrow_icon">-->
+
+
+        <Button
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:text="10"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:layout_alignRight="@id/get_button">
+        </Button>
+<!--            android:background="@drawable/cart_item_count">-->
+
+    </RelativeLayout>
+
+</RelativeLayout>

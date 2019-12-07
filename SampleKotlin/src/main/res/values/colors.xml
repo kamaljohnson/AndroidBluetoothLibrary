@@ -2,5 +2,15 @@
 <resources>
     <color name="colorPrimary">#03A9F4</color>
     <color name="colorPrimaryDark">#2196F3</color>
-    <color name="colorAccent">#FF5722</color>
+    <color name="colorAccent">#FF9800</color>
+    <color name="warning">#FF5722</color>
+    <color name="blue">#007AFF</color>
+    <color name="orange">#FF9800</color>
+    <color name="green">#8BC34A</color>
+    <color name="cyan">#CAEFF5</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="colorRecieveText">#00FF00</color>
+    <color name="colorSendText">#82CAFF</color>
+    <color name="colorStatusText">#FFDB58</color>
 </resources>
